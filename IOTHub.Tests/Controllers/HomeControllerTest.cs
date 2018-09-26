@@ -5,7 +5,7 @@ using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using IOTHub;
-using IOTHub.Controllers;
+using IOTHubWeb.Controllers;
 
 namespace IOTHub.Tests.Controllers
 {
