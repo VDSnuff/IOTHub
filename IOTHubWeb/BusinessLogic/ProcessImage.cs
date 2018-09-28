@@ -20,13 +20,15 @@ namespace IOTHub.BusinessLogic
             List<IInputOutputArray> licensePlateImagesList = new List<IInputOutputArray>();
             List<IInputOutputArray> filteredLicensePlateImagesList = new List<IInputOutputArray>();
             List<RotatedRect> licenseBoxList = new List<RotatedRect>();
-            List<string> words = _licensePlateRecognitionEngine.DetectLicensePlate(
-               image,
-               licensePlateImagesList,
-               filteredLicensePlateImagesList,
-               licenseBoxList);
+            List<string> words = _licensePlateRecognitionEngine.DetectLicensePlate(image, licensePlateImagesList, filteredLicensePlateImagesList, licenseBoxList);
 
             watch.Stop();
+
+           //TO DO
+           //Compare Licens Plate with DB () 
+
+           //Send Messege to Client if we can open the gate
+
         }
     }
 }

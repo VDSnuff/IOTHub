@@ -23,7 +23,8 @@ namespace IOTHub.Controllers
 
         private bool RunLicensePlateRecognition()
         {
-            string folderPath = Server.MapPath(@"~/App_Data/");
+            // string folderPath = Server.MapPath(@"~/App_Data/");
+            string folderPath = @"C:\VDA_FTP";
             ImgImport imgImport = new ImgImport(folderPath);
             ProcessImage processImage = new ProcessImage();
             if (!imgImport.IsEmpty())
