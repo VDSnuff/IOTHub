@@ -29,5 +29,9 @@ namespace IOTHub.Models
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<Dot> Dots { get; set; }
+        public DbSet<Node> Nodes { get; set; }
     }
 }
