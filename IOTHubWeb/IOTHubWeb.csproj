@@ -222,6 +222,10 @@
     <Compile Include="Migrations\201809302116206_NodeDotCarModels.Designer.cs">
       <DependentUpon>201809302116206_NodeDotCarModels.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201809302132012_UserIdToString.cs" />
+    <Compile Include="Migrations\201809302132012_UserIdToString.Designer.cs">
+      <DependentUpon>201809302132012_UserIdToString.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Car.cs" />
@@ -333,6 +337,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201809302116206_NodeDotCarModels.resx">
       <DependentUpon>201809302116206_NodeDotCarModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201809302132012_UserIdToString.resx">
+      <DependentUpon>201809302132012_UserIdToString.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

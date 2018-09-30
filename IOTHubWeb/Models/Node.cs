@@ -11,7 +11,7 @@ namespace IOTHub.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int OwnerID { get; set; }
+        public string OwnerID { get; set; }
         [Required]
         public string Name { get; set; }
         public string Description { get; set; }

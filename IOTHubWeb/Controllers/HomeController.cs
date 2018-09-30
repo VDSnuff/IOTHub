@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IOTHub.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +9,8 @@ namespace IOTHub.Controllers
 {
     public class HomeController : Controller
     {
+        private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
+
         public ActionResult Index()
         {
             return View();
@@ -23,6 +26,18 @@ namespace IOTHub.Controllers
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
+
+            return View();
+        }
+
+
+        /// <summary>
+        /// Test for app DBContext
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Test()
+        {
+            var test = _applicationDbContext.Cars.Select(x => x).FirstOrDefault();
 
             return View();
         }

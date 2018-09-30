@@ -11,7 +11,7 @@ namespace IOTHub.Models
         [Key]
         public int Id { get; set; }
         [Required]
-        public int OwnerId { get; set; }
+        public string OwnerId { get; set; }
         [Required]
         [MaxLength(50)]
         [Display(Name = "License Plate Number")]
