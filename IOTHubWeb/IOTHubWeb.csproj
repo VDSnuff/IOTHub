@@ -204,13 +204,17 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="BusinessLogic\BusinessLogic.cs" />
     <Compile Include="BusinessLogic\Import\ImgImport.cs" />
     <Compile Include="BusinessLogic\LicensePlateRecognitionEngine.cs" />
     <Compile Include="BusinessLogic\ProcessImage.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CarsController.cs" />
+    <Compile Include="Controllers\DotsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LicensePlateRecognitionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NodesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -314,9 +318,25 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\LicensePlateRecognition\Index.cshtml" />
+    <Content Include="Views\Nodes\Create.cshtml" />
+    <Content Include="Views\Nodes\Delete.cshtml" />
+    <Content Include="Views\Nodes\Details.cshtml" />
+    <Content Include="Views\Nodes\Edit.cshtml" />
+    <Content Include="Views\Nodes\Index.cshtml" />
+    <Content Include="Views\Dots\Create.cshtml" />
+    <Content Include="Views\Dots\Delete.cshtml" />
+    <Content Include="Views\Dots\Details.cshtml" />
+    <Content Include="Views\Dots\Edit.cshtml" />
+    <Content Include="Views\Dots\Index.cshtml" />
+    <Content Include="Views\Cars\Create.cshtml" />
+    <Content Include="Views\Cars\Delete.cshtml" />
+    <Content Include="Views\Cars\Details.cshtml" />
+    <Content Include="Views\Cars\Edit.cshtml" />
+    <Content Include="Views\Cars\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Node\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

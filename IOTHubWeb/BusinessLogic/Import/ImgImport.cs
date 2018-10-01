@@ -29,6 +29,8 @@ namespace IOTHubWeb.BusinessLogic
    
                 Mat image = new Mat(file);
                 images.Add(image);
+
+                File.Delete(file);
             }
             return images;
         }
@@ -37,7 +39,7 @@ namespace IOTHubWeb.BusinessLogic
         {
             filesList = new List<string>();
 
-            FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"ftp://{IOTHub.Properties.Settings.Default.ftpIPWork}/");
+            FtpWebRequest request = (FtpWebRequest)WebRequest.Create($"ftp://{IOTHub.Properties.Settings.Default.ftpIPHome}/");
             request.Method = WebRequestMethods.Ftp.ListDirectory;
             request.Credentials = new NetworkCredential("v.dovnich@gmail.com", "masikas290");
             FtpWebResponse response = (FtpWebResponse)request.GetResponse();

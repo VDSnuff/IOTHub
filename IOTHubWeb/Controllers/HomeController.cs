@@ -29,17 +29,5 @@ namespace IOTHub.Controllers
 
             return View();
         }
-
-
-        /// <summary>
-        /// Test for app DBContext
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Test()
-        {
-            var test = _applicationDbContext.Cars.Select(x => x).FirstOrDefault();
-
-            return View();
-        }
     }
 }
