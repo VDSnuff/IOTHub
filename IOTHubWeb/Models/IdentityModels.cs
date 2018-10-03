@@ -33,5 +33,6 @@ namespace IOTHub.Models
         public DbSet<Car> Cars { get; set; }
         public DbSet<Dot> Dots { get; set; }
         public DbSet<Node> Nodes { get; set; }
+        public DbSet<DotType> DotTypes { get; set; }
     }
 }

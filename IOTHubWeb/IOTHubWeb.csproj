@@ -237,12 +237,17 @@
     <Compile Include="Migrations\201810031808218_DoteType.Designer.cs">
       <DependentUpon>201810031808218_DoteType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810031937219_DotType.cs" />
+    <Compile Include="Migrations\201810031937219_DotType.Designer.cs">
+      <DependentUpon>201810031937219_DotType.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotType.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Dot.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\DotViewModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Node.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -398,6 +403,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810031808218_DoteType.resx">
       <DependentUpon>201810031808218_DoteType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810031937219_DotType.resx">
+      <DependentUpon>201810031937219_DotType.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

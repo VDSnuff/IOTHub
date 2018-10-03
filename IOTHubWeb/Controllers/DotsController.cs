@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IOTHub.Models;
+using IOTHub.ViewModels;
 
 namespace IOTHub.Controllers
 {
@@ -42,13 +43,21 @@ namespace IOTHub.Controllers
         {
 
             Node node = db.Nodes.Find(nodeId);
-            Dot dot = new Dot();
-            dot.NodeId = node.Id;
-           // dot.
-            
+            DotViewModels dotView = new DotViewModels();
+            dotView.Dot.NodeId = node.Id;
 
 
-            return View();
+
+            // Drop Down List For Teachers
+            dotView.DotTypes = db.DotTypes.ToList();
+            List<SelectListItem> itemsT = new List<SelectListItem>();
+            foreach (var item in dotView.DotTypes)
+            {
+                itemsT.Add(new SelectListItem { Value = item.Id.ToString(), Text = item.Type });
+            }
+            dotView.ValuesT = itemsT;
+
+            return View(dotView);
         }
 
         // POST: Dots/Create
@@ -56,15 +65,17 @@ namespace IOTHub.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,NodeId,Name,Description,Model,Place,Latitude,Longitude")] Dot dot)
+        public ActionResult Create(DotViewModels dotView)
         {
-            if (ModelState.IsValid)
-            {
-                db.Dots.Add(dot);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            return View(dot);
+            DotType dotType = new DotType();
+            dotType = db.DotTypes.Find(dotView.SelectedValuesT.FirstOrDefault());
+            Dot dot = new Dot();
+            dot = dotView.Dot;
+            dot.Type = dotType;
+
+            db.Dots.Add(dot);
+            db.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // GET: Dots/Edit/5

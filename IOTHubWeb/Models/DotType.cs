@@ -8,8 +8,8 @@ namespace IOTHub.Models
 {
     public class DotType
     {
-        [Key]
-        int Id { get; set; }
-        string Type { get; set; }
+       [Key]
+       public int Id { get; set; }
+       public string Type { get; set; }
     }
 }
