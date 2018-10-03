@@ -7,10 +7,8 @@ using System.Web.Mvc;
 
 namespace IOTHub.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private ApplicationDbContext _applicationDbContext = new ApplicationDbContext();
-
         public ActionResult Index()
         {
             return View();

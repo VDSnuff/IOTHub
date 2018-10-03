@@ -13,7 +13,7 @@ using IOTHubWeb.BusinessLogic;
 
 namespace IOTHub.Controllers
 {
-    public class LicensePlateRecognitionController : Controller
+    public class LicensePlateRecognitionController : BaseController
     {
         public ActionResult Index()
         {

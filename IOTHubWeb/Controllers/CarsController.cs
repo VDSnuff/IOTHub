@@ -11,10 +11,9 @@ using IOTHub.Models;
 
 namespace IOTHub.Controllers
 {
-    public class CarsController : Controller
+    [Authorize]
+    public class CarsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
         // GET: Cars
         public async Task<ActionResult> Index()
         {
@@ -47,15 +46,15 @@ namespace IOTHub.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,OwnerId,LicensePlateNumber,Brand,Model,Color")] Car car)
+        public async Task<ActionResult> Create([Bind(Include = "Id,LicensePlateNumber,Brand,Model,Color")] Car car)
         {
+            car.OwnerId = GetUserId();
             if (ModelState.IsValid)
             {
                 db.Cars.Add(car);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             return View(car);
         }
 

@@ -11,7 +11,7 @@ using IOTHub.Models;
 namespace IOTHub.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

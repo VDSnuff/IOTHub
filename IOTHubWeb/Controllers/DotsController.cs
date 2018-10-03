@@ -11,9 +11,10 @@ using IOTHub.Models;
 
 namespace IOTHub.Controllers
 {
-    public class DotsController : Controller
+
+    [Authorize]
+    public class DotsController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: Dots
         public async Task<ActionResult> Index()
@@ -37,8 +38,16 @@ namespace IOTHub.Controllers
         }
 
         // GET: Dots/Create
-        public ActionResult Create()
+        public ActionResult Create(int nodeId)
         {
+
+            Node node = db.Nodes.Find(nodeId);
+            Dot dot = new Dot();
+            dot.NodeId = node.Id;
+           // dot.
+            
+
+
             return View();
         }
 
@@ -55,7 +64,6 @@ namespace IOTHub.Controllers
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-
             return View(dot);
         }
 

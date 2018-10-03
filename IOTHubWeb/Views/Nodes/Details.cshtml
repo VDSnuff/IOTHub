@@ -1,7 +1,7 @@
-﻿@model IOTHub.Models.Node
+﻿@model IOTHub.ViewModels.NodeDetailsViewModels
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "Node Details";
 }
 
 <h2>Details</h2>
@@ -11,80 +11,128 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.OwnerID)
+            @Html.DisplayNameFor(model => model.NodeDedails.Name)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.OwnerID)
+            @Html.DisplayFor(model => model.NodeDedails.Name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayNameFor(model => model.NodeDedails.Description)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Name)
+            @Html.DisplayFor(model => model.NodeDedails.Description)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayNameFor(model => model.NodeDedails.Country)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Description)
+            @Html.DisplayFor(model => model.NodeDedails.Country)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Country)
+            @Html.DisplayNameFor(model => model.NodeDedails.City)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Country)
+            @Html.DisplayFor(model => model.NodeDedails.City)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.City)
+            @Html.DisplayNameFor(model => model.NodeDedails.Street)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.City)
+            @Html.DisplayFor(model => model.NodeDedails.Street)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Street)
+            @Html.DisplayNameFor(model => model.NodeDedails.Area)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Street)
+            @Html.DisplayFor(model => model.NodeDedails.Area)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Area)
+            @Html.DisplayNameFor(model => model.NodeDedails.Latitude)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Area)
+            @Html.DisplayFor(model => model.NodeDedails.Latitude)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Latitude)
+            @Html.DisplayNameFor(model => model.NodeDedails.Longitude)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Latitude)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Longitude)
+            @Html.DisplayFor(model => model.NodeDedails.Longitude)
         </dd>
 
     </dl>
+
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Description)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Model)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Place)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Latitude)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Longitude)
+            </th>
+            <th></th>
+        </tr>
+
+
+        @foreach (var item in Model.Dots)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Model)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Place)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Latitude)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Longitude)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                </td>
+            </tr>
+        }
+
+    </table>
+
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+    @Html.ActionLink("Create new dot", "Create", "Dots", new { nodeId = Model.NodeDedails.Id}, new { @class = "btn btn-success" })
 </p>

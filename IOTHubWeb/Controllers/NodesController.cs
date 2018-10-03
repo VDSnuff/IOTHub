@@ -8,13 +8,16 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IOTHub.Models;
+using System.Security.Claims;
+using IOTHub.BusinessLogic;
+using IOTHub.ViewModels;
 
 namespace IOTHub.Controllers
 {
-    public class NodesController : Controller
+    [Authorize]
+    public class NodesController : BaseController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
-
+    
         // GET: Nodes
         public async Task<ActionResult> Index()
         {
@@ -28,12 +31,17 @@ namespace IOTHub.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Node node = await db.Nodes.FindAsync(id);
+            Node node = new Node();
+            node = await db.Nodes.FindAsync(id);
+            NodeDetailsViewModels nodeDetailsViewModels = new NodeDetailsViewModels();
+            nodeDetailsViewModels.NodeDedails = node;
+            nodeDetailsViewModels.Dots = new List<Dot>();
+            nodeDetailsViewModels.Dots = await db.Dots.Where(x => x.NodeId == node.Id).ToListAsync();
             if (node == null)
             {
                 return HttpNotFound();
             }
-            return View(node);
+            return View(nodeDetailsViewModels);
         }
 
         // GET: Nodes/Create
@@ -47,16 +55,16 @@ namespace IOTHub.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,OwnerID,Name,Description,Country,City,Street,Area,Latitude,Longitude")] Node node)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Name,Description,Country,City,Street,Area,Latitude,Longitude")] Node node)
         {
-            if (ModelState.IsValid)
-            {
+            node.OwnerID = GetUserId();
+            //if (ModelState.IsValid)
+            //{
                 db.Nodes.Add(node);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
-            }
-
-            return View(node);
+            //}
+           // return View(node);
         }
 
         // GET: Nodes/Edit/5
