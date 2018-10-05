@@ -260,6 +260,8 @@
     <Compile Include="ViewModels\NodeDetailsViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\triangle_32.png" />
+    <Content Include="App_Data\triangle_64.png" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -382,7 +384,6 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
     <Folder Include="Views\Node\" />
   </ItemGroup>

@@ -6,14 +6,16 @@
 
 <h2>Index</h2>
 
+
+
 <p>
     @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
         @*<th>
-            @Html.DisplayNameFor(model => model.OwnerID)
-        </th>*@
+                @Html.DisplayNameFor(model => model.OwnerID)
+            </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Name)
         </th>
@@ -41,41 +43,70 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.OwnerID)
-        </td>*@
-        <td>
-            @Html.DisplayFor(modelItem => item.Name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Country)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.City)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Street)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Area)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }, new { @class = "btn btn-primary" }) 
-            @Html.ActionLink("Details", "Details", new { id=item.Id }, new { @class = "btn btn-info" }) 
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id }, new { @class = "btn btn-danger" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            @*<td>
+                    @Html.DisplayFor(modelItem => item.OwnerID)
+                </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Street)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Area)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<style>
+    #map {
+        height: 400px;
+        width: 1150px;
+    }
+</style>
+
+<div id="map"></div>
+<script>
+    var latLng = { lat: @Model.FirstOrDefault().Latitude, lng: @Model.FirstOrDefault().Longitude };
+    var map;
+    var marker;
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center:latLng,
+            zoom: 18
+        });
+         marker = new google.maps.Marker({
+            position: latLng,
+            map: map,
+             title: '@Model.FirstOrDefault().Name',
+             //icon: 'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+             label: { color: '#000000', background: '', fontWeight: 'bold', fontSize: '14px', text: '@Model.FirstOrDefault().Name' },
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEi9L_6xG0THDSXMx0rZZnIqlL0cvtkZg&callback=initMap" async defer></script>
