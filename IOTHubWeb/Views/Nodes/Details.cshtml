@@ -85,6 +85,9 @@
                 @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Description)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Type)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Dots.FirstOrDefault().Model)
             </th>
             <th>
@@ -108,6 +111,9 @@
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DotType.Type)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Model)
@@ -134,5 +140,39 @@
 </div>
 <p>
     @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
-    @Html.ActionLink("Create new dot", "Create", "Dots", new { nodeId = Model.NodeDedails.Id}, new { @class = "btn btn-success" })
+    @Html.ActionLink("Create new dot", "Create", "Dots", new { nodeId = Model.NodeDedails.Id }, new { @class = "btn btn-success" })
 </p>
+<hr />
+<style>
+    #map {
+        height: 400px;
+        width: 1150px;
+    }
+</style>
+
+<div id="map"></div>
+<script>
+    var latLng = { lat: @Model.NodeDedails.Latitude, lng: @Model.NodeDedails.Longitude };
+    var map;
+    var marker;
+    var dotListJS;
+    @{var dotListRaw = Model.Dots;}
+    function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+            center:latLng,
+            zoom: 18
+        });
+
+        dotListJS = @Html.Raw(Json.Encode(dotListRaw));
+        dotListJS.forEach(function (element) {
+            marker = new google.maps.Marker({
+                position: { lat: element.Latitude, lng: element.Longitude },
+                map: map,
+                title: element.Name,
+                icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/App_Data/triangle_64.png?raw=true',
+                label: { color: '#ED1C24', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+            });
+        });
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEi9L_6xG0THDSXMx0rZZnIqlL0cvtkZg&callback=initMap" async defer></script>

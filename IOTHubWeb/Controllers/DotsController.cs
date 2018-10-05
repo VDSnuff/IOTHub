@@ -71,7 +71,7 @@ namespace IOTHub.Controllers
             dotType = db.DotTypes.Find(dotView.SelectedValuesT.FirstOrDefault());
             Dot dot = new Dot();
             dot = dotView.Dot;
-            dot.Type = dotType;
+            dot.Type = dotType.Id;
 
             db.Dots.Add(dot);
             db.SaveChanges();

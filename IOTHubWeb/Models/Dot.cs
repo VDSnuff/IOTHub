@@ -1,8 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Script.Serialization;
 
 namespace IOTHub.Models
 {
@@ -12,8 +15,13 @@ namespace IOTHub.Models
         public int Id { get; set; }
         [Required]
         public int NodeId { get; set; }
+
         [Required]
-        public DotType Type { get; set; }
+        [ForeignKey("DotType")]
+        public int Type { get; set; }
+        [ScriptIgnore]
+        public virtual DotType DotType { get; set; }
+
         public string Model { get; set; }
         [Required]
         public string Name { get; set; }

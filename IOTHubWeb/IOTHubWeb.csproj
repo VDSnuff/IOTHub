@@ -241,6 +241,14 @@
     <Compile Include="Migrations\201810031937219_DotType.Designer.cs">
       <DependentUpon>201810031937219_DotType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810052154258_Dot_FK.cs" />
+    <Compile Include="Migrations\201810052154258_Dot_FK.Designer.cs">
+      <DependentUpon>201810052154258_Dot_FK.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810052223294_DotType_KF.cs" />
+    <Compile Include="Migrations\201810052223294_DotType_KF.Designer.cs">
+      <DependentUpon>201810052223294_DotType_KF.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DotType.cs" />
     <Compile Include="ViewModels\AccountViewModels.cs" />
@@ -407,6 +415,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810031937219_DotType.resx">
       <DependentUpon>201810031937219_DotType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810052154258_Dot_FK.resx">
+      <DependentUpon>201810052154258_Dot_FK.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810052223294_DotType_KF.resx">
+      <DependentUpon>201810052223294_DotType_KF.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

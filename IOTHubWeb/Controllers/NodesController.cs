@@ -33,9 +33,11 @@ namespace IOTHub.Controllers
             }
             Node node = new Node();
             node = await db.Nodes.FindAsync(id);
-            NodeDetailsViewModels nodeDetailsViewModels = new NodeDetailsViewModels();
-            nodeDetailsViewModels.NodeDedails = node;
-            nodeDetailsViewModels.Dots = new List<Dot>();
+            NodeDetailsViewModels nodeDetailsViewModels = new NodeDetailsViewModels
+            {
+                NodeDedails = node,
+                Dots = new List<Dot>()
+            };
             nodeDetailsViewModels.Dots = await db.Dots.Where(x => x.NodeId == node.Id).ToListAsync();
             if (node == null)
             {
