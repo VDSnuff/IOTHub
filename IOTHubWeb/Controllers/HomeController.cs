@@ -1,7 +1,11 @@
 ﻿using IOTHub.Models;
+using IOTHub.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -9,9 +13,13 @@ namespace IOTHub.Controllers
 {
     public class HomeController : BaseController
     {
-        public ActionResult Index()
+        private CancellationToken id;
+
+        public async Task<ActionResult> Index()
         {
-            return View();
+            string userId = GetUserId();
+            List<Node> nodes = await db.Nodes.Where(x => x.OwnerID == userId).ToListAsync();
+            return View(nodes);
         }
 
         public ActionResult About()

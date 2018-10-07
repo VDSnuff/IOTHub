@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using IOTHub.Models;
+using IOTHub.ViewModels;
 
 namespace IOTHub.Controllers
 {
@@ -17,7 +18,25 @@ namespace IOTHub.Controllers
         // GET: Cars
         public async Task<ActionResult> Index()
         {
-            return View(await db.Cars.ToListAsync());
+            List<CarsViewModel> carsViewModel = new List<CarsViewModel>();
+            List<Car> cars = await db.Cars.ToListAsync();
+            IEnumerable<ApplicationUser> userName = db.Users.ToList().Where(x => x.Id == cars.FirstOrDefault().OwnerId);
+            foreach (var car in cars)
+            {
+                CarsViewModel carsVO = new CarsViewModel
+                {
+                    Id = car.Id,
+                    LicensePlateNumber = car.LicensePlateNumber,
+                    Model = car.Model,
+                    OwnerId = car.OwnerId,
+                    Brand = car.Brand,
+                    Color = car.Color,
+                    UserName = userName.FirstOrDefault().UserName
+                };
+                carsViewModel.Add(carsVO);
+            }
+
+            return View(carsViewModel);
         }
 
         // GET: Cars/Details/5

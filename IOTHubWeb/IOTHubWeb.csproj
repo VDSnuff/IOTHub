@@ -255,6 +255,7 @@
     <Compile Include="Models\Car.cs" />
     <Compile Include="Models\Dot.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="ViewModels\CarsViewModel.cs" />
     <Compile Include="ViewModels\DotViewModels.cs" />
     <Compile Include="ViewModels\ManageViewModels.cs" />
     <Compile Include="Models\Node.cs" />
