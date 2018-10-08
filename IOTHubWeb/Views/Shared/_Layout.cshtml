@@ -3,19 +3,24 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - IOTHub</title>
+    <title>@ViewBag.Title - IOT Hub</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
+            
             <div class="navbar-header">
                 <div class="right">
                     @Html.Partial("_LoginPartial")
                 </div>
+                
                 <div class="sidenav">
-                    <div>@Html.ActionLink("IOTHub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
+                    <div class="logo">
+                        <div>@Html.ActionLink("IOT Hub", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
+                        <img style="padding-top: 10px" src="~/Img/IOTHub.png">
+                    </div>
                     <ul class="nav navbar-nav">
                         <li><div>@Html.ActionLink("About", "About", "Home")</div></li>
                         <li><div>@Html.ActionLink("Contact", "Contact", "Home")</div></li>
@@ -28,7 +33,7 @@
     </div>
     @RenderBody()
     <footer class="footer">
-        <div><p>IOTHub Application - @DateTime.Now.Year</p></div>
+        @*<div class="text-center"> @DateTime.Now.Year - <a href="https://github.com/VDSnuff/IOTHub">IOTHub Application</a></div>*@
     </footer>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

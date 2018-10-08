@@ -6,32 +6,315 @@
 
 <style>
     #map {
-        height: 850px;
-        width: 100%;
+        height: 89vh;
+        width: 87%;
+        margin-left: 200px;
+    }
+    .map-control {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 2px rgba(33, 33, 33, 0.4);
+        font-family: 'Roboto','sans-serif';
+        margin: 10px;
+        padding-right: 5px;
+        /* Hide the control initially, to prevent it from appearing
+           before the map loads. */
+        display: none;
+    }
+    /* Display the control once it is inside the map. */
+    #map .map-control {
+        display: block;
+    }
+
+    .selector-control {
+        font-size: 14px;
+        line-height: 30px;
+        vertical-align: baseline;
+    }
     }
 </style>
+<div id="style-selector-control" class="map-control">
+    <input type="radio" name="show-hide" id="hide-poi"
+           class="selector-control">
+    <label for="hide-poi">Hide</label>
+    <input type="radio" name="show-hide" id="show-poi"
+           class="selector-control" checked="checked">
+    <label for="show-poi">Show</label>
+</div>
 <div id="map"></div>
+@*<script>
+        var latLng = { lat: @Model.FirstOrDefault().Latitude, lng: @Model.FirstOrDefault().Longitude };
+        var map;
+        var marker;
+        var nodeListJS;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: latLng,
+                disableDefaultUI: true,
+                zoom: 18
+            });
+
+            dotListJS = @Html.Raw(Json.Encode(Model));
+            dotListJS.forEach(function (element) {
+                marker = new google.maps.Marker({
+                    position: { lat: element.Latitude, lng: element.Longitude },
+                    map: map,
+                    title: element.Name,
+                    icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/App_Data/triangle_64.png?raw=true',
+                    label: { color: '#ED1C24', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+                });
+            });
+        }
+    </script>*@
+@*<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEi9L_6xG0THDSXMx0rZZnIqlL0cvtkZg&callback=initMap" async defer></script>*@
+
 <script>
     var latLng = { lat: @Model.FirstOrDefault().Latitude, lng: @Model.FirstOrDefault().Longitude };
-    var map;
     var marker;
     var nodeListJS;
+
     function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center:latLng,
-            zoom: 18
+
+        // Create a new StyledMapType object, passing it an array of styles,
+        // and the name to be displayed on the map type control.
+        var styledMapType = new google.maps.StyledMapType(
+            [
+                {
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#212121"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.icon",
+                    "stylers": [
+                        {
+                            "visibility": "off"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#757575"
+                        }
+                    ]
+                },
+                {
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#212121"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#757575"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.country",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#9e9e9e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "administrative.locality",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#bdbdbd"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#757575"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#181818"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#616161"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "poi.park",
+                    "elementType": "labels.text.stroke",
+                    "stylers": [
+                        {
+                            "color": "#1b1b1b"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "geometry.fill",
+                    "stylers": [
+                        {
+                            "color": "#2c2c2c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#8a8a8a"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.arterial",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#373737"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#3c3c3c"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.highway.controlled_access",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#4e4e4e"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "road.local",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#616161"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "transit",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#757575"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "geometry",
+                    "stylers": [
+                        {
+                            "color": "#000000"
+                        }
+                    ]
+                },
+                {
+                    "featureType": "water",
+                    "elementType": "labels.text.fill",
+                    "stylers": [
+                        {
+                            "color": "#3d3d3d"
+                        }
+                    ]
+                }
+            ],
+            { name: 'Styled Map' });
+
+        // Create a map object, and include the MapTypeId to add
+        // to the map type control.
+        var map = new google.maps.Map(document.getElementById('map'), {
+            center: latLng,
+            zoom: 15,
+            mapTypeControl: false,
+            mapTypeControlOptions: {
+                mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
+                    'styled_map']
+            }
         });
 
-        dotListJS = @Html.Raw(Json.Encode(Model));
-        dotListJS.forEach(function (element) {
-            marker = new google.maps.Marker({
-                position: { lat: element.Latitude, lng: element.Longitude },
-                map: map,
-                title: element.Name,
-                icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/App_Data/triangle_64.png?raw=true',
-                label: { color: '#ED1C24', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+        // Add controls to the map, allowing users to hide/show features.
+        //var styleControl = document.getElementById('style-selector-control');
+        //map.controls[google.maps.ControlPosition.TOP_LEFT].push(styleControl);
+
+        // Apply new JSON when the user chooses to hide/show features.
+        //document.getElementById('hide-poi').addEventListener('click', function () {
+        //    map.setOptions({ styles: styles['hide'] });
+        //});
+        //document.getElementById('show-poi').addEventListener('click', function () {
+        //    map.setOptions({ styles: styles['default'] });
+        //});
+
+       
+
+        //Associate the styled map with the MapTypeId and set it to display.
+        map.mapTypes.set('styled_map', styledMapType);
+        map.setMapTypeId('styled_map');
+
+          dotListJS = @Html.Raw(Json.Encode(Model));
+            dotListJS.forEach(function (element) {
+                marker = new google.maps.Marker({
+                    position: { lat: element.Latitude, lng: element.Longitude },
+                    map: map,
+                    title: element.Name,
+                    icon: '~/Img/nodes_red.png',
+                    label: { color: '#2D2D30', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+                });
             });
-        });
+
     }
+
+    var styles = {
+        default: null,
+        hide: [
+            {
+                featureType: 'poi.business',
+                stylers: [{ visibility: 'off' }]
+            },
+            {
+                featureType: 'transit',
+                elementType: 'labels.icon',
+                stylers: [{ visibility: 'off' }]
+            }
+        ]
+    };
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEi9L_6xG0THDSXMx0rZZnIqlL0cvtkZg&callback=initMap" async defer></script>
+@*<script src="https://maps.googleapis.com/maps/api/staticmap?key=YOUR_API_KEY&center=-33.9,151.14999999999998&zoom=12&format=png&maptype=roadmap&style=element:geometry%7Ccolor:0x212121&style=element:labels%7Cvisibility:off&style=element:labels.icon%7Cvisibility:off&style=element:labels.text.fill%7Ccolor:0x757575&style=element:labels.text.stroke%7Ccolor:0x212121&style=feature:administrative%7Celement:geometry%7Ccolor:0x757575&style=feature:administrative.country%7Celement:labels.text.fill%7Ccolor:0x9e9e9e&style=feature:administrative.land_parcel%7Cvisibility:off&style=feature:administrative.locality%7Celement:labels.text.fill%7Ccolor:0xbdbdbd&style=feature:administrative.neighborhood%7Cvisibility:off&style=feature:poi%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:poi.park%7Celement:geometry%7Ccolor:0x181818&style=feature:poi.park%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:poi.park%7Celement:labels.text.stroke%7Ccolor:0x1b1b1b&style=feature:road%7Celement:geometry.fill%7Ccolor:0x2c2c2c&style=feature:road%7Celement:labels.text.fill%7Ccolor:0x8a8a8a&style=feature:road.arterial%7Celement:geometry%7Ccolor:0x373737&style=feature:road.highway%7Celement:geometry%7Ccolor:0x3c3c3c&style=feature:road.highway.controlled_access%7Celement:geometry%7Ccolor:0x4e4e4e&style=feature:road.local%7Celement:labels.text.fill%7Ccolor:0x616161&style=feature:transit%7Celement:labels.text.fill%7Ccolor:0x757575&style=feature:water%7Celement:geometry%7Ccolor:0x000000&style=feature:water%7Celement:labels.text.fill%7Ccolor:0x3d3d3d&size=480x360" async defer></script>*@
