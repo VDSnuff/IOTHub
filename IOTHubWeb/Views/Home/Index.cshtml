@@ -7,7 +7,7 @@
 <style>
     #map {
         height: 89vh;
-        width: 87%;
+        width: auto;
         margin-left: 200px;
     }
     .map-control {
@@ -262,7 +262,7 @@
         // to the map type control.
         var map = new google.maps.Map(document.getElementById('map'), {
             center: latLng,
-            zoom: 15,
+            zoom: 17,
             mapTypeControl: false,
             mapTypeControlOptions: {
                 mapTypeIds: ['roadmap', 'satellite', 'hybrid', 'terrain',
@@ -294,8 +294,8 @@
                     position: { lat: element.Latitude, lng: element.Longitude },
                     map: map,
                     title: element.Name,
-                    icon: '~/Img/nodes_red.png',
-                    label: { color: '#2D2D30', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+                    icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/Img/nodes_red.png?raw=true',
+                    label: { color: '#FFFFFF', fontWeight: 'bold', fontSize: '14px', text: element.Name },
                 });
             });
 
