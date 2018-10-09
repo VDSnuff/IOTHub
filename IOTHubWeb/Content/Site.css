@@ -50,9 +50,9 @@ textarea {
             color: #9d9d9d;
         }
 
-.main {
-    margin-left: 200px; /* Same as the width of the sidenav */
-}
+/*.main {
+    margin-left: 200px;
+}*/
 
 .right {
     position: absolute;
@@ -85,7 +85,6 @@ textarea {
     margin-left: 33px;
     margin-top: 65%;
     margin-bottom: 0px;
-
 }
 
 .logoName {
@@ -97,6 +96,47 @@ textarea {
 .navbar-inverse .navbar-brand {
     color: #f1f1f1;
 }
+
+
+a:link {
+    text-decoration: none;
+}
+
+a:visited {
+    text-decoration: none;
+}
+
+.btn-default a {
+    color: #2d2d30;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @media screen and (max-height: 450px) {
     .sidenav {

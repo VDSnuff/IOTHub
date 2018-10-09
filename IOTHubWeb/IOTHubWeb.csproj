@@ -399,7 +399,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Base\" />
-    <Folder Include="Views\Node\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

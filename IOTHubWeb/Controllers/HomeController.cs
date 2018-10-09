@@ -11,6 +11,7 @@ using System.Web.Mvc;
 
 namespace IOTHub.Controllers
 {
+    [Authorize]
     public class HomeController : BaseController
     {
         private CancellationToken id;
