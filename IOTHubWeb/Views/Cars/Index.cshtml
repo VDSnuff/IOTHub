@@ -3,10 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-<div style="color:white; padding-left:5%" class="container">
-    <h2>Index</h2>
+<div style="color:white; padding-left:15%; padding-top:12%;" class="container">
+    <h2>LP Nunber</h2>
     <p>
-        @Html.ActionLink("Create New", "Create")
+        @Html.ActionLink("Create New", "Create", null, new { @class = "btn btn-success" })
     </p>
     <table class="table">
         <tr>
@@ -47,12 +47,12 @@
                     @Html.DisplayFor(modelItem => item.Color)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-primary" }) 
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }, new { @class = "btn btn-info" })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                 </td>
             </tr>
         }
 
     </table>
-    </div>
+</div>
