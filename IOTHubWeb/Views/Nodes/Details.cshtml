@@ -4,10 +4,9 @@
     ViewBag.Title = "Node Details";
 }
 <div style="color:white; padding-left:5%" class="container">
-    <h2>Details</h2>
+    <h1>Node details</h1>
 
     <div>
-        <h4>Node</h4>
         <hr />
         <dl class="dl-horizontal">
             <dt>
@@ -76,6 +75,7 @@
 
         </dl>
 
+        <h2>Dots in this node</h2>
         <table class="table">
             <tr>
                 <th>
@@ -101,7 +101,6 @@
                 </th>
                 <th></th>
             </tr>
-
 
             @foreach (var item in Model.Dots)
             {
@@ -144,38 +143,38 @@
     </p>
 </div>
 @*<style>
-    #map {
-        height: 56vh;
-        width: auto;
-    }
-</style>
+        #map {
+            height: 56vh;
+            width: auto;
+        }
+    </style>
 
-<div id="map"></div>
-<script>
-    var latLng = { lat: @Model.NodeDedails.Latitude, lng: @Model.NodeDedails.Longitude };
-    var map;
-    var marker;
-    var dotListJS;
-    @{var dotListRaw = Model.Dots;}
-    function initMap() {
-        map = new google.maps.Map(document.getElementById('map'), {
-            center:latLng,
-            zoom: 18
-        });
-
-        dotListJS = @Html.Raw(Json.Encode(dotListRaw));
-        dotListJS.forEach(function (element) {
-            marker = new google.maps.Marker({
-                position: { lat: element.Latitude, lng: element.Longitude },
-                map: map,
-                title: element.Name,
-                icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/App_Data/triangle_64.png?raw=true',
-                label: { color: '#ED1C24', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+    <div id="map"></div>
+    <script>
+        var latLng = { lat: @Model.NodeDedails.Latitude, lng: @Model.NodeDedails.Longitude };
+        var map;
+        var marker;
+        var dotListJS;
+        @{var dotListRaw = Model.Dots;}
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center:latLng,
+                zoom: 18
             });
-        });
-    }
-</script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEi9L_6xG0THDSXMx0rZZnIqlL0cvtkZg&callback=initMap" async defer></script>*@
+
+            dotListJS = @Html.Raw(Json.Encode(dotListRaw));
+            dotListJS.forEach(function (element) {
+                marker = new google.maps.Marker({
+                    position: { lat: element.Latitude, lng: element.Longitude },
+                    map: map,
+                    title: element.Name,
+                    icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/App_Data/triangle_64.png?raw=true',
+                    label: { color: '#ED1C24', fontWeight: 'bold', fontSize: '14px', text: element.Name },
+                });
+            });
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAEi9L_6xG0THDSXMx0rZZnIqlL0cvtkZg&callback=initMap" async defer></script>*@
 
 
 
@@ -447,17 +446,15 @@
         map.mapTypes.set('styled_map', styledMapType);
         map.setMapTypeId('styled_map');
 
-          dotListJS = @Html.Raw(Json.Encode(Model.Dots));
-            dotListJS.forEach(function (element) {
-                marker = new google.maps.Marker({
-                    position: { lat: element.Latitude, lng: element.Longitude },
-                    map: map,
-                    title: element.Name,
-                    icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/Img/nodes_red.png?raw=true',
-                    label: { color: '#FFFFFF', fontWeight: 'bold', fontSize: '14px', text: element.Name },
-                });
-            });
 
+        var nodeName = '@Model.NodeDedails.Name'
+                marker = new google.maps.Marker({
+                    position: { lat: @Model.NodeDedails.Latitude, lng: @Model.NodeDedails.Longitude },
+                    map: map,
+                    title: nodeName,
+                    icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/Img/nodes_red.png?raw=true',
+                    label: { color: '#FFFFFF', fontWeight: 'bold', fontSize: '14px', text: nodeName },
+                });
     }
 
     var styles = {

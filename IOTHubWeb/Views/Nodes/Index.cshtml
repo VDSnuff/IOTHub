@@ -335,6 +335,15 @@
                     icon: 'https://github.com/VDSnuff/IOTHub/blob/master/IOTHubWeb/Img/nodes_red.png?raw=true',
                     label: { color: '#FFFFFF', fontWeight: 'bold', fontSize: '14px', text: element.Name },
                 });
+
+                google.maps.event.addListener(
+                    marker,
+                    "click",
+                    function (e) {
+                        return window.location.href = 'http://localhost:51691/Nodes/Details/' + element.Id;
+                    }
+                );
+
             });
 
     }
