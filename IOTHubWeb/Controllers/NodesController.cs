@@ -21,7 +21,14 @@ namespace IOTHub.Controllers
         // GET: Nodes
         public async Task<ActionResult> Index()
         {
-            return View(await db.Nodes.ToListAsync());
+            var userId = GetUserId();
+
+            List<Node> nodes = await db.Nodes.Where(n => n.OwnerID == userId).ToListAsync();
+            if (nodes.Count() == 0)
+            {
+                nodes.Add(new Node { Area = "Test Area", City = "City Test", Country = "Test Country", Description = "Test Description", Id = 0, Latitude = 53.122828, Longitude = 17.995526, Name = "Test Name", OwnerID = userId, Street = "Test Street" });
+            }
+            return View(nodes);
         }
 
         // GET: Nodes/Details/5

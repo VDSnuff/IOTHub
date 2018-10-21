@@ -1,0 +1,95 @@
+﻿@model IOTHub.ViewModels.DotViewModels
+
+@{
+    ViewBag.Title = "Details";
+}
+<div style="color:white; padding-left:10%; padding-top:10%;" class="container">
+    <h2>Ip camera dot details</h2>
+
+    <div class="row">
+        <hr />
+        <div class="col-md-3">
+            <dl class="dl-horizontal" style="margin-top:43%; margin-left:-50px;">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dot.Name)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dot.Name)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dot.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dot.Description)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dot.Model)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dot.Model)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dot.Place)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dot.Place)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dot.Latitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dot.Latitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Dot.Longitude)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Dot.Longitude)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.IP)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IP)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Port)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Port)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Login)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Login)
+                </dd>
+            </dl>
+
+        </div>
+        <div class="col-md-6">
+            <img style="-webkit-user-select: none;" src="http://@Model.IP:@Model.Port/videostream.cgi?loginuse=@Model.Login&amp;loginpas=@Model.Password">
+        </div>
+    </div>
+    <hr>
+    <p>
+        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-default" })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Dot.Id }, new { @class = "btn btn-primary" })
+    </p>
+
+</div>

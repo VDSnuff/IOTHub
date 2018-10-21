@@ -30,11 +30,22 @@ namespace IOTHub.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            DotViewModels dotViewModels = new DotViewModels();
             Dot dot = await db.Dots.FindAsync(id);
-            if (dot == null)
+            if (dot == null) return HttpNotFound();
+            var dotType = await db.DotTypes.FindAsync(dot.Type);
+            var iPCamDot = await db.IPCamDots.Where(x => x.DotId == dot.Id).FirstOrDefaultAsync();
+            dotViewModels.Dot = dot;
+            dotViewModels.IP = iPCamDot.IP;
+            dotViewModels.Login = iPCamDot.Login;
+            dotViewModels.Password = iPCamDot.Password;
+            dotViewModels.Port = iPCamDot.Port;
+
+            if (dotType.Type == "IP Cam")
             {
-                return HttpNotFound();
+                return View("IPCamDotDetails", dotViewModels);
             }
+
             return View(dot);
         }
 
@@ -45,10 +56,6 @@ namespace IOTHub.Controllers
             Node node = db.Nodes.Find(nodeId);
             DotViewModels dotView = new DotViewModels();
             dotView.Dot.NodeId = node.Id;
-
-
-
-            // Drop Down List For Teachers
             dotView.DotTypes = db.DotTypes.ToList();
             List<SelectListItem> itemsT = new List<SelectListItem>();
             foreach (var item in dotView.DotTypes)
@@ -72,7 +79,17 @@ namespace IOTHub.Controllers
             Dot dot = new Dot();
             dot = dotView.Dot;
             dot.Type = dotType.Id;
+            db.Dots.Add(dot);
+            db.SaveChanges();
 
+            IPCamDot iPCamDot = new IPCamDot();
+            iPCamDot.DotId = dot.Id;
+            iPCamDot.IP = dotView.IP;
+            iPCamDot.Port = dotView.Port;
+            iPCamDot.Login = dotView.Login;
+            iPCamDot.Password = dotView.Password;
+
+            db.IPCamDots.Add(iPCamDot);
             db.Dots.Add(dot);
             db.SaveChanges();
             return RedirectToAction("Index");
@@ -130,6 +147,7 @@ namespace IOTHub.Controllers
         public async Task<ActionResult> DeleteConfirmed(int id)
         {
             Dot dot = await db.Dots.FindAsync(id);
+            IPCamDot iPCamDot = db.IPCamDots.Where(x => x.DotId == dot.Id).First();
             db.Dots.Remove(dot);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");

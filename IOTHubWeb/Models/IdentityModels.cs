@@ -34,5 +34,6 @@ namespace IOTHub.Models
         public DbSet<Dot> Dots { get; set; }
         public DbSet<Node> Nodes { get; set; }
         public DbSet<DotType> DotTypes { get; set; }
+        public DbSet<IPCamDot> IPCamDots { get; set; }
     }
 }
