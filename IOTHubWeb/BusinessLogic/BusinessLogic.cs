@@ -1,6 +1,7 @@
 ﻿using IOTHub.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
 using System.Web;
@@ -27,7 +28,20 @@ namespace IOTHub.BusinessLogic
 
         public void SendComandToGate(bool status)
         {
-            //Do something...
+            if (status)
+            {
+                Debug.WriteLine("\n" +
+                                "@ !!!!!!!!!!!!!!!!!!!!! @\n" +
+                                "@ !!! Open the gate !!! @\n" +
+                                "@ !!!!!!!!!!!!!!!!!!!!! @\n");
+            }
+            else
+            {
+                Debug.WriteLine("\n" +
+                                "@ !!!!!!!!!!!!!!!!!!!!! @\n" +
+                                "@ !!! Do nothing... !!! @\n" +
+                                "@ !!!!!!!!!!!!!!!!!!!!! @\n");
+            }
         }
     }
 }
