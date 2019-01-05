@@ -27,13 +27,16 @@ namespace IOTHub.Controllers
             string folderPath = @"C:\VDA_FTP";
             ImgImport imgImport = new ImgImport(folderPath);
             ProcessImage processImage = new ProcessImage();
-            if (!imgImport.IsEmpty())
+            if (imgImport.IsEmpty() || !imgImport.IsJPG())
             {
-                foreach(Mat img in imgImport.LoadImages())
-                processImage.Process(img, "");
+                return false;
+            }
+            else
+            {
+                foreach (Mat img in imgImport.LoadImages())
+                    processImage.Process(img, "");
                 return true;
             }
-            else return false;
         }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Net;
 using System;
 using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace IOTHubWeb.BusinessLogic
 {
@@ -26,7 +27,7 @@ namespace IOTHubWeb.BusinessLogic
             images = new List<Mat>();
             foreach (string file in Directory.EnumerateFiles(FolderPath, "*.jpg"))
             {
-   
+
                 Mat image = new Mat(file);
                 images.Add(image);
 
@@ -55,7 +56,7 @@ namespace IOTHubWeb.BusinessLogic
 
             reader.Close();
             response.Close();
-            
+
             return filesList;
         }
 
@@ -89,9 +90,26 @@ namespace IOTHubWeb.BusinessLogic
 
         public bool IsEmpty()
         {
-            return Directory.GetFiles(FolderPath).Length > 0 ? false : true;
+            string[] files = Directory.GetFiles(FolderPath);
+            if (files.Length > 0) return false;
+            else return true;
         }
 
-
+        public bool IsJPG()
+        {
+            string[] files = Directory.GetFiles(FolderPath);
+            bool result = false;
+            foreach (string file in files)
+            {
+                Match match = Regex.Match(file, @"\w*.jpg\w*");
+                if (match.Success)
+                {
+                    result = true;
+                    break;
+                }
+                else result = false;
+            }
+            return result;
+        }
     }
 }
