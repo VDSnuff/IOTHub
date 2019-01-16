@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Security.Claims;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace IOTHub.BusinessLogic
@@ -17,30 +18,36 @@ namespace IOTHub.BusinessLogic
 
         }
 
-        public bool FindLicensePlateInDB(List<string> words)
+        public string FindLicensePlateInDB(List<string> words)
         {
+            string lpn = "";
+
             foreach (string word in words)
             {
-                if (_applicationDbContext.Cars.Select(x => x.LicensePlateNumber == word).Count() > 0) return true;
+                string pword = Regex.Replace(word.Trim().ToUpper(), @"\s+", "");
+                Car car = _applicationDbContext.Cars.FirstOrDefault(x => x.LicensePlateNumber == pword);
+                Debug.WriteLine($"Word: {word}");
+                if (car != null) lpn = car.LicensePlateNumber;
+                return lpn;
             }
-            return false;
+            return lpn;
         }
 
-        public void SendComandToGate(bool status)
+        public void SendComandToGate(string result)
         {
-            if (status)
-            {
-                Debug.WriteLine("\n" +
-                                "@ !!!!!!!!!!!!!!!!!!!!! @\n" +
-                                "@ !!! Open the gate !!! @\n" +
-                                "@ !!!!!!!!!!!!!!!!!!!!! @\n");
-            }
-            else
+            if (string.IsNullOrWhiteSpace(result))
             {
                 Debug.WriteLine("\n" +
                                 "@ !!!!!!!!!!!!!!!!!!!!! @\n" +
                                 "@ !!! Do nothing... !!! @\n" +
                                 "@ !!!!!!!!!!!!!!!!!!!!! @\n");
+            }
+            else
+            {
+                Debug.WriteLine("\n" +
+                               "@ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@\n" +
+                               $"  Open the gate (LPN: {result})\n" +
+                               "@ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!@\n");
             }
         }
     }

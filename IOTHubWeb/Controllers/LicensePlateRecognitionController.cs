@@ -17,7 +17,8 @@ namespace IOTHub.Controllers
     {
         public ActionResult Index()
         {
-            HostingEnvironment.QueueBackgroundWorkItem(ct => RunLicensePlateRecognition());
+            //  HostingEnvironment.QueueBackgroundWorkItem(ct => RunLicensePlateRecognition());
+            RunLicensePlateRecognition();
             return View();
         }
 
@@ -34,7 +35,7 @@ namespace IOTHub.Controllers
             else
             {
                 foreach (Mat img in imgImport.LoadImages())
-                    processImage.Process(img, "");
+                    processImage.Process(img, "C:/Users/vdovn/source/repos/VDSnuff/IOTHub/IOTHubWeb/bin/");
                 return true;
             }
         }
